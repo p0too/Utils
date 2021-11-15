@@ -7,15 +7,22 @@
 
 /* print contents of current directory recursively*/
 
+/*
+  a = "hello"  (5) ; strlen() doesn't count '\0'
+  b = "world"  (5)
+  delm = "/"    (1)
+
+  res = "hello/world" (5 + 1 + 5) +1 for '\0'
+*/
+
 char *concat_path(const char *a, const char *b) 
 {
-  char *dir_path = (char *) malloc(sizeof(char) * (strlen(a) + strlen(b)) + 1);;
+  char *dir_path = (char *) malloc(sizeof(char) * (strlen(a) + strlen(b)) + 2);
   char *j = dir_path;
   while((*(j++) = *(a++)) != '\0') {}
   *(j-1) = '/';
-  
   while((*(j++) = *(b++)) != '\0') {}
-  *j = '\0';
+
   return dir_path;
 }
 
@@ -74,7 +81,7 @@ void print_dir_recursively(const char *dir_path, int level)
 
 int main()
 {
-  const char *dir_path = "."; 
+  const char *dir_path = "../../../..";
   print_dir_recursively(dir_path, 1);
 
   return 0;
